@@ -1,0 +1,7 @@
+# Bila document root server menunjuk ke folder proyek (bukan public/), teruskan ke public/.
+# Disarankan: atur document root langsung ke folder public/.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(app|storage|database)(/|$) - [F,L]
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

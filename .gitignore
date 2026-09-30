@@ -1,0 +1,11 @@
+/app/config/.env
+/storage/logs/*
+/storage/backups/*
+/storage/cache/*
+/storage/private/**/*
+/public/uploads/news/*
+/public/uploads/events/*
+/public/uploads/docs/*
+!.gitkeep
+!/storage/private/*/
+.DS_Store
