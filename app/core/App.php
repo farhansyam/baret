@@ -37,6 +37,12 @@ final class App
         if ($base === null) {
             $dir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
             $base = ($dir === '/' || $dir === '.') ? '' : rtrim($dir, '/');
+            // Hosting tanpa akses document root: .htaccess di root meneruskan ke public/ secara internal,
+            // sehingga URL publik tidak memuat "/public".
+            $uri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+            if ($base !== '' && str_ends_with($base, '/public') && !str_starts_with($uri, $base . '/') && $uri !== $base) {
+                $base = substr($base, 0, -strlen('/public'));
+            }
         }
         return $base;
     }

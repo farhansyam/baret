@@ -1,7 +1,12 @@
-# Bila document root server menunjuk ke folder proyek (bukan public/), teruskan ke public/.
-# Disarankan: atur document root langsung ke folder public/.
+# Untuk hosting yang document root-nya folder proyek (mis. public_html berisi seluruh file BARET).
+# Semua request diteruskan ke folder public/ tanpa "/public" di URL.
+# Bila bisa, lebih baik atur document root langsung ke folder public/.
+Options -Indexes
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    # Folder internal tidak boleh diakses dari web
     RewriteRule ^(app|storage|database)(/|$) - [F,L]
+    RewriteRule ^\.(env|git) - [F,L]
+    RewriteCond %{REQUEST_URI} !^/public/
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>

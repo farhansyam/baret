@@ -9,3 +9,5 @@
 !.gitkeep
 !/storage/private/*/
 .DS_Store
+/dist
+/database/baret_demo.sql
